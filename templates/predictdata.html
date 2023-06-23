@@ -1,0 +1,203 @@
+<html>
+
+
+
+<body>
+   
+  
+
+    <div class="login">
+       <h2>Car Price Predictor</h2>
+       
+    </div>
+   
+       <form id="prediction-form" action="{{ url_for('predict_datapoint')}}" method="post">
+       
+        
+
+        <div class="mb-3">
+            <label class="form-label">km</label>
+            <input class="form-control" type="number" name="km"
+                placeholder="Enter your car's km" min='0' max='400000' />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">hp</label>
+            <input class="form-control" type="number" name="hp"
+                placeholder="Enter your car's hp" min='40' max='400' />
+        </div>
+
+
+        <div class="mb-3">
+            <label class="form-label">Displacement</label>
+            <input class="form-control" type="number" name="Displacement"
+                placeholder="Enter your car's Displacement" min='0' max='4.0' />
+        </div>
+
+       
+
+        <div class="mb-3">
+            <label class="form-label">Comfort_Convenience</label>
+            <input class="form-control" type="number" name="Comfort_Convenience"
+                placeholder="Enter your car's Comfort_Convenience" min='0' max='44' />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Extras</label>
+            <input class="form-control" type="number" name="Extras"
+                placeholder="Extras" min='0' max='44' />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Safety_Security</label>
+            <input class="form-control" type="number" name="Safety_Security"
+                placeholder="Safety_Security" min='0' max='44' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">First_Registration</label>
+            <input class="form-control" type="number" name="First_Registration"
+                placeholder="First_Registration" min='2016.0' max='2019.0' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">door_numbers</label>
+            <input class="form-control" type="number" name="door_numbers"
+                placeholder="door_numbers" min='2.0' max='5.0' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">seat_numbers</label>
+            <input class="form-control" type="number" name="seat_numbers"
+                placeholder="seat_numbers" min='2' max='7' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">consumption_comb</label>
+            <input class="form-control" type="number" name="consumption_comb"
+                placeholder="consumption_comb" min='0' max='12.0' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">consumption_city</label>
+            <input class="form-control" type="number" name="consumption_city"
+                placeholder="consumption_city" min='0' max='12.0' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">co2_emission</label>
+            <input class="form-control" type="number" name="co2_emission"
+                placeholder="co2_emission" min='0' max='990' />
+        </div>
+
+
+
+
+        <div class="mb-3">
+            <label class="form-label">Make and Model</label>
+            <select class="form-control" name="make_model" placeholder="Select Make and Model" required>
+                <option class="placeholder" selected disabled value="">Select Make and Model</option>
+                {% for option in options['make_model'] %}
+                <option value="{{ option }}">{{ option }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Body Type</label>
+            <select class="form-control" name="body_type" placeholder="Select Body Type" required>
+                <option class="placeholder" selected disabled value="">Select Body Type</option>
+                {% for option in options['body_type'] %}
+                <option value="{{ option }}">{{ option }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Type</label>
+            <select class="form-control" name="Type" placeholder="Select Type" required>
+                <option class="placeholder" selected disabled value="">Select Type</option>
+                {% for option in options['Type'] %}
+                <option value="{{ option }}">{{ option }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Upholstery</label>
+            <select class="form-control" name="Upholstery" placeholder="Select Upholstery" required>
+                <option class="placeholder" selected disabled value="">Select Upholstery</option>
+                {% for option in options['Upholstery'] %}
+                <option value="{{ option }}">{{ option }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Fuel</label>
+            <select class="form-control" name="Fuel" placeholder="Select Fuel" required>
+                <option class="placeholder" selected disabled value="">Select Fuel</option>
+                {% for option in options['Fuel'] %}
+                <option value="{{ option }}">{{ option }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Body Color</label>
+            <select class="form-control" name="Body_Color" placeholder="Select Body Color" required>
+                <option class="placeholder" selected disabled value="">Select Body Color</option>
+                {% for option in options['Body_Color'] %}
+                <option value="{{ option }}">{{ option }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Gearing Type</label>
+            <select class="form-control" name="Gearing_Type" placeholder="Select Gearing Type" required>
+                <option class="placeholder" selected disabled value="">Select Gearing Type</option>
+                {% for option in options['Gearing_Type'] %}
+                <option value="{{ option }}">{{ option }}</option>
+                {% endfor %}
+            </select>
+        </div>
+            
+
+
+       
+      
+        
+        <div class="mb-3">
+            <input class="btn btn-primary" type="submit" value="PREDİCT PRICE" required />
+        </div>
+
+    <div id="result-container">
+        <h2 id="result">FİLL THE FORM  AND PRESS BUTTON {{results}} </h2>
+    </div>
+       
+    </form>
+    
+    
+    </div>
+
+    
+        
+</body>
+    
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#prediction-form").submit(function(event) {
+                event.preventDefault(); // Prevent form submission
+
+                // Collect form data
+                var formData = $(this).serialize();
+
+                // Send an AJAX POST request to the server
+                $.ajax({
+                    type: "POST",
+                    url: $(this).attr("action"),
+                    data: formData,
+                    success: function(response) {
+                        // Update the result section with the new prediction
+                        $("#result-container").html('<h3>THE prediction is ' + response + '</h3>');
+                        //$("#result-container").html('<h3>THE prediction is </h3>');
+                    },
+                    error: function() {
+                        alert("An error occurred while predicting the car price.");
+                    }
+                });
+            });
+        });
+    </script>
+   
+</html>

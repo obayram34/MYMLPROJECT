@@ -109,3 +109,54 @@
     </h2>
    <body>
 </html>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#prediction-form").submit(function(event) {
+                event.preventDefault(); // Prevent form submission
+
+                // Collect form data
+                var formData = $(this).serialize();
+
+                // Send an AJAX POST request to the server
+                $.ajax({
+                    type: "POST",
+                    url: $(this).attr("action"),
+                    data: formData,
+                    success: function(response) {
+                        // Update the result section with the new prediction
+                        $("#result-container").html('<h2>THE prediction is ' + response + '</h2>');
+                    },
+                    error: function() {
+                        alert("An error occurred while predicting the car price.");
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+<script>
+    const predictionForm = document.getElementById('prediction-form');
+    const resultElement = document.getElementById('result');
+
+    predictionForm.addEventListener('submit', (event) => {
+        event.preventDefault(); // Prevent the form from submitting
+
+        // Fetch the form data
+        const formData = new FormData(predictionForm);
+
+        // Send a POST request to the server
+        fetch('/predictdata', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(result => {
+            // Update the result dynamically
+            resultElement.textContent = `THE prediction is ${result}`;
+        });
+    });
+</script>

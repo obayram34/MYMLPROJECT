@@ -10,7 +10,7 @@ from sklearn.ensemble import (
 
 )
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import r2_score
+from sklearn.metrics import r2_score, mean_absolute_error
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.tree import DecisionTreeRegressor
 from xgboost import XGBRegressor
@@ -40,15 +40,26 @@ class ModelTrainer:
             )
 
             models = {
+                "XGBRegressor": XGBRegressor(),
+                "Linear Regression": LinearRegression(),
                 "Random Forest": RandomForestRegressor(),
                 "Decision Tree": DecisionTreeRegressor(),
                 "Gradient Boosting": GradientBoostingRegressor(),
-                "Linear Regression": LinearRegression(),
-                "XGBRegressor": XGBRegressor(),
+                
+                
                 "CatBoosting Regressor": CatBoostRegressor(verbose=False),
                 "AdaBoost Regressor": AdaBoostRegressor(),
             }
             params={
+                "XGBRegressor":{
+                    'learning_rate':[.1,.01,.05,.001],
+                    'n_estimators': [8,16,32,64,128,256]
+                },
+                
+                "Linear Regression":{},
+
+                
+
                 "Decision Tree": {
                     'criterion':['squared_error', 'friedman_mse', 'absolute_error', 'poisson'],
                     # 'splitter':['best','random'],
@@ -68,11 +79,10 @@ class ModelTrainer:
                     # 'max_features':['auto','sqrt','log2'],
                     'n_estimators': [8,16,32,64,128,256]
                 },
-                "Linear Regression":{},
-                "XGBRegressor":{
-                    'learning_rate':[.1,.01,.05,.001],
-                    'n_estimators': [8,16,32,64,128,256]
-                },
+                
+                
+             
+                    
                 "CatBoosting Regressor":{
                     'depth': [6,8,10],
                     'learning_rate': [0.01, 0.05, 0.1],
@@ -102,7 +112,7 @@ class ModelTrainer:
             ]
 
             
-
+            #categorical_ix = X_train.select_dtypes(include=['object', 'bool']).columns
 
             best_model=models[best_model_name]
             #best_model2=optimized_model_report[best_model_name]
@@ -123,7 +133,8 @@ class ModelTrainer:
             predicted=best_model.predict(X_test)
 
             r2_square=r2_score(y_test, predicted)
-            return r2_square  #,best_model_name
+            mae_score=mean_absolute_error(y_test,predicted)
+            return r2_square #,best_model_name
 
 
         except Exception as e :

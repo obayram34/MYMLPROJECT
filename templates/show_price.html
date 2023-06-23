@@ -1,0 +1,44 @@
+<html>
+
+
+
+<body>
+   
+         
+ <div id="result-container">
+           
+        <h2> -----------------  <a id="" href=""> {{results}}  </a> ---------------- </h2>     
+           
+    
+ 
+</div>
+      
+</body>
+    
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#prediction-form").submit(function(event) {
+                event.preventDefault(); // Prevent form submission
+
+                // Collect form data
+                var formData = $(this).serialize();
+
+                // Send an AJAX POST request to the server
+                $.ajax({
+                    type: "POST",
+                    url: $(this).attr("action"),
+                    data: formData,
+                    success: function(response) {
+                        // Update the result section with the new prediction
+                        $("#result-container").html('<h2>Prediction  : ' + response + '</h2>');
+                    },
+                    error: function() {
+                        alert("An error occurred while predicting the car price.");
+                    }
+                });
+            });
+        });
+    </script>
+   
+</html>
