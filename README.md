@@ -1,1 +1,1 @@
-## End to End Machine Learning Project"# END_TO_END_PREDICTION_CARPRICE" 
+## End to End Machine Learning Project STUDY "# STUDENT NOTE PREDİCTİON PROJECT " 
